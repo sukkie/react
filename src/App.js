@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 
 // 0. React엔진 - 데이터 변경 감지해서 UI그려줌
@@ -13,19 +14,40 @@ import './App.css';
 // - 내부에 적는 방법
 // - 외부파일에 적는 방법
 // - 라이브러리 사용(부트스트랩, component-styled)
-let a = 10;
-
-const mystyle = {
-  color: 'red',
-};
-
 function App() {
-  let b = 20;
+  console.log('App 실행');
+
+  let sample = [
+    { id: 1, name: 'aaa' },
+    { id: 2, name: 'bbb' },
+    { id: 3, name: 'ccc' },
+    { id: 4, name: 'ddd' },
+  ];
+
+  const [users, setUsers] = useState(sample);
+
+  const download = () => {
+    // let sample = [
+    //   { id: 1, name: 'aaa' },
+    //   { id: 2, name: 'bbb' },
+    //   { id: 3, name: 'ccc' },
+    //   { id: 4, name: 'ddd' },
+    // ];
+
+    // 레퍼런스가 변경되어야 App가 다시 싫행됨.
+    // setUsers(sample); // 재렌더링 되지 않음
+    setUsers([...sample]); // 재렌더링 되됨
+  };
+
+  // 랜더링 시점 = 상태값 변경
   return (
     <div>
-      <div style={mystyle}>안녕{a === 10 ? '10입니다' : '10이 아닙니다.'}</div>
-      <h1 className="box-style">해당태그{b}</h1>
-      <hr />
+      <button onClick={download}>다운로드</button>
+      {users.map((o) => (
+        <h1>
+          {o.id}, {o.name}
+        </h1>
+      ))}
     </div>
   );
 }
