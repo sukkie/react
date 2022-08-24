@@ -6,11 +6,6 @@ const StyledDeleteButton = styled.button`
   color: ${(props) => (props.user.username === 'ssar' ? 'blue' : 'red')};
 `;
 
-const StyledAddButton = styled(StyledDeleteButton)`
-  color: ${(props) => (props.user.username === 'ssar' ? 'blue' : 'red')};
-  background-color: green;
-`;
-
 const Home = (props) => {
   console.log(props);
 
@@ -21,10 +16,8 @@ const Home = (props) => {
   return (
     <div>
       <h1>홈 : {number}</h1>
-      <StyledAddButton user={user} onClick={() => setNumber(number + 1)}>
-        번호증가
-      </StyledAddButton>
-      {/* StyledDeleteButton에 부모로부터 받은 user값을 user의 이름으로 넘겨줌 */}
+      <button onClick={() => setNumber(number + 1)}>번호증가</button>
+      //
       <StyledDeleteButton user={user} onClick={() => setBoards([])}>
         전체삭제
       </StyledDeleteButton>
