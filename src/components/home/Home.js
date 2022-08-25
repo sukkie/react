@@ -7,7 +7,6 @@ const StyledDeleteButton = styled.button`
 `;
 
 const StyledAddButton = styled(StyledDeleteButton)`
-  color: ${(props) => (props.user.username === 'ssar' ? 'blue' : 'red')};
   background-color: green;
 `;
 
