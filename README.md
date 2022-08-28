@@ -72,3 +72,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## styled-components
 
 npm install --save styled-components
+
+## react-router-dom
+
+npm i react-router-dom
