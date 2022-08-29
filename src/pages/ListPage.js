@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const StyledItemBoxDiv = styled.div`
@@ -11,6 +11,8 @@ const StyledItemBoxDiv = styled.div`
   align-items: center;
 `;
 
+let postsSize = 0;
+
 const ListPage = () => {
   console.log('aaaaaa');
 
@@ -22,18 +24,16 @@ const ListPage = () => {
     { id: 5, title: '제목5', content: '내용5' },
   ]);
 
+  // id값 초기화를 위해 사용
+  useEffect(() => {
+    postsSize = posts.length;
+  }, []);
+
   const [post, setPost] = useState({
     id: 0,
     title: '',
     content: '',
   });
-
-  const handleWrite = () => {
-    console.log(post);
-    setPost({ ...post, id: 6 });
-    console.log(post);
-    setPosts([...posts, post]);
-  };
 
   // const handleChangeTitle = (e) => {
   //   console.log(e);
@@ -51,6 +51,17 @@ const ListPage = () => {
     console.log(post);
     setPost({ ...post, [e.target.name]: e.target.value });
     console.log(post);
+  };
+
+  const handleWrite = () => {
+    postsSize++;
+    const t = { ...post, id: postsSize };
+    setPosts([...posts, t]);
+  };
+
+  const handleDelete = (e) => {
+    const id = e.target.name;
+    setPosts(posts.filter((post) => post.id != id));
   };
 
   return (
@@ -77,11 +88,13 @@ const ListPage = () => {
       </form>
       <hr />
       {posts.map((post) => (
-        <StyledItemBoxDiv>
+        <StyledItemBoxDiv key={post.id}>
           <div>
             번호 : {post.id}, 제목 : {post.title}, 내용 : {post.content}
           </div>
-          <button>삭제</button>
+          <button name={post.id} onClick={handleDelete}>
+            삭제
+          </button>
         </StyledItemBoxDiv>
       ))}
     </div>
